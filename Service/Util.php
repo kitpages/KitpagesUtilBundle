@@ -4,13 +4,13 @@ namespace Kitpages\UtilBundle\Service;
 
 
 class Util {
-    
+
     /**
      * Create a directory and all subdirectories needed.
      * @param string $pathname
      * @param octal $mode example 0666
      */
-    public static function mkdirr($pathname, $mode = null)
+    public function mkdirr($pathname, $mode = null)
     {
         // Check if directory already exists
         if (is_dir($pathname) || empty($pathname)) {
@@ -22,7 +22,7 @@ class Util {
         }
         // Crawl up the directory tree
         $nextPathname = substr($pathname, 0, strrpos($pathname, "/"));
-        if (self::mkdirr($nextPathname, $mode)) {
+        if ($this->mkdirr($nextPathname, $mode)) {
             if (!file_exists($pathname)) {
                 if (is_null($mode)) {
                     return mkdir($pathname);
@@ -37,18 +37,18 @@ class Util {
         }
         return false;
     }
-    
+
     /**
      * remove recursively directory
      * @param string $dir Physical directory to remove
      */
-    public static function rmdirr($dir)
+    public function rmdirr($dir)
     {
         if ($handle = opendir("$dir")) {
             while ($item = readdir($handle)) {
                 if ( ($item != ".") && ($item != "..") ) {
                     if (is_dir("$dir/$item")) {
-                        self::rmdirr("$dir/$item");
+                        $this->rmdirr("$dir/$item");
                     } else {
                         unlink("$dir/$item");
                     }
@@ -58,7 +58,7 @@ class Util {
             rmdir($dir);
         }
     }
-   
+
     /**
      * send the content of a file to the output by chuncks in order to
      * limite the memory consumption.
@@ -66,7 +66,7 @@ class Util {
      * @param $retbytes
      * @return stream of bytes by chunks of 1Mo
      */
-    public static function readfileChunked ($filename, $retbytes=false)
+    public function readfileChunked ($filename, $retbytes=false)
     {
         $chunksize = 1*(1024*1024); // how many bytes per chunk
         $buffer = '';
@@ -81,7 +81,7 @@ class Util {
             ob_flush();
             flush();
             if ($retbytes) {
-                $cnt += self::binaryStrLen($buffer);
+                $cnt += $this->binaryStrLen($buffer);
             }
         }
         $status = fclose($handle);
@@ -98,7 +98,7 @@ class Util {
      * @param $mime mime type
      * @return void
      */
-    public static function getFile($file, $cacheTime,$mime=null)
+    public function getFile($file, $cacheTime,$mime=null)
     {
         //First, see if the file exists
         if (!is_file($file)) {
@@ -112,7 +112,7 @@ class Util {
             ini_set('zlib.output_compression', 'Off');
         }
 
-        $ctype = self::getMimeContentType($file);
+        $ctype = $this->getMimeContentType($file);
         if ($mime != null) {
             $ctype = $mime;
         }
@@ -122,7 +122,7 @@ class Util {
         header('Pragma: cache');
         header('Content-type: '.$ctype);
         header('Content-length: '.filesize($file));
-        self::readfileChunked($file);
+        $this->readfileChunked($file);
         exit;
     }
 
@@ -132,7 +132,7 @@ class Util {
      * @param string $fileName
      * @return string mime content type
      */
-    public static function getMimeContentType($fileName)
+    public function getMimeContentType($fileName)
     {
         if (function_exists('mime_content_type')) {
             return mime_content_type($fileName);
@@ -215,7 +215,7 @@ class Util {
         }
         return 'application/octet-stream';
     }
-    
+
 }
 
 ?>
