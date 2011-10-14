@@ -1,9 +1,16 @@
 <?php
 namespace Kitpages\UtilBundle\Service;
 
-
+use Kitpages\UtilBundle\Service\StripTags;
 
 class Util {
+
+
+    public function stripTags($option, $text)
+    {
+        $filter = new StripTags($option);
+        return $filter->filter($text);
+    }
 
     /**
      * Create a directory and all subdirectories needed.
