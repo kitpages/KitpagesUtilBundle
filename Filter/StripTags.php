@@ -1,5 +1,5 @@
 <?php
-namespace Kitpages\UtilBundle\Service;
+namespace Kitpages\UtilBundle\Filter;
 /**
  * Zend Framework
  *
@@ -71,7 +71,7 @@ class StripTags
      *     'allowAttribs'  => Attributes which are allowed
      *     'allowComments' => Are comments allowed ?
      *
-     * @param  string|array|Zend_Config $options
+     * @param  string|array $options
      * @return void
      */
     public function __construct($options = null)

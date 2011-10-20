@@ -12,5 +12,5 @@
         <service id="kitpages.util" class="%kitpages_util.util.class%">
         </service>
     </services>
-  
+
 </container>

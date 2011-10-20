@@ -1,11 +1,21 @@
 <?php
 namespace Kitpages\UtilBundle\Service;
 
-use Kitpages\UtilBundle\Service\StripTags;
+use Kitpages\UtilBundle\Filter\StripTags;
 
 class Util {
 
-
+    /**
+     * Sets the filter options
+     * Allowed options are
+     *     'allowTags'     => Tags which are allowed
+     *     'allowAttribs'  => Attributes which are allowed
+     *     'allowComments' => Are comments allowed ?
+     *
+     * @param  string|array $options
+     * @param string $text text to filter
+     * @return string text filtered
+     */
     public function stripTags($option, $text)
     {
         $filter = new StripTags($option);
