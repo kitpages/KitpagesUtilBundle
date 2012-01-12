@@ -48,7 +48,7 @@ class Util {
                 }
             }
         } else {
-            throw new Exception (
+            throw new \Exception (
                 "intermediate mkdirr $nextPathname failed"
             );
         }
@@ -115,11 +115,11 @@ class Util {
      * @param $mime mime type
      * @return void
      */
-    public function getFile($file, $cacheTime,$mime=null)
+    public function getFile($file, $cacheTime, $mime=null, $name=null)
     {
         //First, see if the file exists
         if (!is_file($file)) {
-            throw new Exception(
+            throw new \Exception(
                 "Download Manager : file [$file] doesn't exist"
             );
         }
@@ -139,6 +139,9 @@ class Util {
         header('Pragma: cache');
         header('Content-type: '.$ctype);
         header('Content-length: '.filesize($file));
+        if ($name != null) {
+            header("Content-Disposition: attachment; filename=\"" . $name . "\"");
+        }
         $this->readfileChunked($file);
         exit;
     }
