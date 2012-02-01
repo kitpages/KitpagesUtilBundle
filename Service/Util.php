@@ -236,6 +236,28 @@ class Util {
         return 'application/octet-stream';
     }
 
+    /**
+     * returns encode a sring in url
+     * @param string $value
+     * @return string
+     */
+    public function urlPathEncode($value) {
+        // cas de la valeur null
+        if (is_null($value)) {
+            return "";
+        }
+        // plus d'accents
+        $a = 'ÀÁÂÃÄÅÆÇÈÉÊËÌÍÎÏÐÑÒÓÔÕÖØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõöøùúûýýþÿŔŕç';
+        $b = 'aaaaaaaceeeeiiiidnoooooouuuuybsaaaaaaaceeeeiiiidnoooooouuuyybyRrc';
+        $value = utf8_decode($value);
+        $value = strtr($value, utf8_decode($a), $b);
+        $value = strtolower($value);
+        // ponctuation
+        $value = strtr($value, utf8_decode("'\""), "__");
+        // autres caracteres
+        $value = preg_replace("/[^a-z0-9\-\_]/","-",$value);
+        return $value;
+    }
 }
 
 ?>
