@@ -6,10 +6,14 @@
 
     <parameters>
         <parameter key="kitpages_util.util.class">Kitpages\UtilBundle\Service\Util</parameter>
+        <parameter key="kitpages_util.hash.class">Kitpages\UtilBundle\Service\Hash</parameter>
     </parameters>
 
     <services>
         <service id="kitpages.util" class="%kitpages_util.util.class%">
+        </service>
+        <service id="kitpages_util.hash" class="%kitpages_util.hash.class%">
+            <argument>%kernel.secret%</argument>
         </service>
     </services>
 
