@@ -14,23 +14,53 @@ WARNING, works only on unix/linux systems.
 
 Installation
 ------------
-put the code in vendors/Kitpages/FileBundle
 
-add vendors/ in the app/autoload.php
+If you are using `DEPS` :
+    
+    [KitpagesUtilBundle]
+        git=https://github.com/kitpages/KitpagesUtilBundle.git
+        target=/bundles/Kitpages/UtilBundle
 
-add the new Bundle in app/appKernel.php
+Add `Kitpages` namespace to your autoloader :
 
-Then you can use the service which is named kitpages.util
+``` php
+<?php // app/autoload.php
+
+$loader->registerNamespaces(array(
+    // ...
+    'Kitpages' => __DIR__.'/../vendor/bundles',
+));
+```
+
+Enable the bundle in your kernel :
+
+``` php 
+<?php // app/AppKernel.php
+
+public function registerBundles()
+{
+    $bundles = array(
+        // ...
+        new Kitpages\UtilBundle\KitpagesUtilBundle(),
+    );
+}
+```
+
+Then you can use the service which is named `kitpages.util`
 
 User's guide
 ------------
 
 Let's say you are in a controller
 
-    $util = $this->get('kitpages.util');
-    // create recursively a directory
-    $util->mkdirr("/tmp/test/foo/bar");
-    // delete recursively the test directory
-    $util->rmdirr("/tmp/test");
-    // send a jpg image to the browser with a 3600 expire time
-    $util->getFile("/tmp/toto.jpg", 3600)
+``` php
+<?php
+
+$util = $this->get('kitpages.util');
+// create recursively a directory
+$util->mkdirr("/tmp/test/foo/bar");
+// delete recursively the test directory
+$util->rmdirr("/tmp/test");
+// send a jpg image to the browser with a 3600 expire time
+$util->getFile("/tmp/toto.jpg", 3600)
+```
