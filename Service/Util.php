@@ -154,9 +154,6 @@ class Util {
      */
     public function getMimeContentType($fileName)
     {
-        if (function_exists('mime_content_type')) {
-            return mime_content_type($fileName);
-        }
 
         $mimeTypes = array(
             'txt' => 'text/plain',
