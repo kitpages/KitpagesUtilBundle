@@ -235,7 +235,7 @@ class Util {
         if (array_key_exists($ext, $mimeTypes)) {
             return $mimeTypes[$ext];
         } elseif (function_exists('finfo_open')) {
-            $finfo = finfo_open(FILEINFO_MIME);
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimetype = finfo_file($finfo, $fileName);
             finfo_close($finfo);
             return $mimetype;
