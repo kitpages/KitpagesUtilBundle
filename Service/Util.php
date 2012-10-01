@@ -152,8 +152,12 @@ class Util {
      * @param string $fileName
      * @return string mime content type
      */
-    public function getMimeContentType($fileName)
+    public function getMimeContentType($file, $fileName = null)
     {
+
+        if ($fileName == null) {
+            $fileName = $file;
+        }
 
         $mimeTypes = array(
             'txt' => 'text/plain',
@@ -236,7 +240,7 @@ class Util {
             return $mimeTypes[$ext];
         } elseif (function_exists('finfo_open')) {
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
-            $mimetype = finfo_file($finfo, $fileName);
+            $mimetype = finfo_file($finfo, $file);
             finfo_close($finfo);
             return $mimetype;
         }
