@@ -40,7 +40,6 @@ class StripTags
      *
      * This setting is now deprecated, and ignored internally.
      *
-     * @deprecated
      * @var boolean
      */
     public $commentsAllowed = false;
@@ -122,7 +121,6 @@ class StripTags
      *
      * This setting is now deprecated and ignored internally.
      *
-     * @deprecated
      * @param  boolean $commentsAllowed
      * @return Zend_Filter_StripTags Provides a fluent interface
      */
