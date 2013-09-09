@@ -6,7 +6,7 @@ Only little methods for common problems :
 - send a file to the browser for a download, sending an image or so what
 - ...
 
-Actually I believe nobody will be interested in including this Bundle in it's project.
+Actually I believe nobody will be interested in including this Bundle in it's project. This bundle is globally deprecated.
 
 It is used mainly by the KitpagesCmsBundle.
 
